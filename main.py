@@ -32,16 +32,9 @@ def addClient():
     else:
         return notFound()
 
-#Method Delete
-@app.route('/delete/<string:nameClient>')
-def deleteClient(nameClient):
-    clientes = db['clientes']
-    clientes.delete_one({'name': nameClient})
-    return redirect(url_for('index'))
-
 # Method Edit
-@app.route('/edit/<string:nameClient>', method=['POST'])
-def edit(nameClient):
+@app.route('/edit/<string:nameClient>')
+def editClient(nameClient):
     clientes = db['clientes']
     name = request.form['name']
     lastName = request.form['lastname']
@@ -53,6 +46,14 @@ def edit(nameClient):
         return redirect(url_for('index'))
     else:
         return notFound()
+
+#Method Delete
+@app.route('/delete/<string:nameClient>')
+def deleteClient(nameClient):
+    clientes = db['clientes']
+    clientes.delete_one({'name': nameClient})
+    return redirect(url_for('index'))
+
 
 #error de la ruta
 @app.errorhandler(404)
